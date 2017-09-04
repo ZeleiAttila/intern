@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/masterLayout.xhtml"
+	xmlns:sec="http://www.springframework.org/security/tags">
+	<ui:define name="head-extra">
+		<!-- custom css -->
+	</ui:define>
+	<ui:define name="pageTitle">Users</ui:define>
+	<ui:define name="content">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading top-bar">
+						<div class="col-md-8 col-xs-8">
+							<h3 class="panel-title">
+								<span class="glyphicon glyphicon-plus-sign"></span> Users
+							</h3>
+						</div>
+
+					</div>
+					<div class="panel-body ">
+						<p:dataTable var="user" value="#{usersView.users}">
+							<p:column headerText="UsreName">
+								<h:outputText value="#{user.username}" />
+							</p:column>
+
+
+						</p:dataTable>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</ui:define>
+</ui:composition>

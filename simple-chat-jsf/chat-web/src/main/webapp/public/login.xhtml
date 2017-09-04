@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/masterLayout.xhtml"
+	xmlns:sec="http://www.springframework.org/security/tags">
+	<ui:define name="head-extra">
+		<!-- custom css -->
+	</ui:define>
+	<ui:define name="pageTitle">Login</ui:define>
+	<ui:define name="content">
+		<div>
+
+			<div class="wrapper">
+
+				<h:form id="loginForm" prependId="false" styleClass="form-signin">
+					<h:panelGroup layout="block" class="error"
+						rendered="#{param['error'] == 1}">
+						<div class="ui-messages ui-widget">
+							<div class="ui-messages-fatal ui-corner-all">
+
+								<ul>
+									<li><span class="ui-messages-fatal-summary"></span><span
+										class="ui-messages-fatal-detail">Unknown user name or
+											bad password!</span></li>
+								</ul>
+							</div>
+						</div>
+
+					</h:panelGroup>
+
+					<h2 class="form-signin-heading">Please login</h2>
+					<h:inputText id="username" required="true" label="username"
+						styleClass="form-control" value="#{loginContoller.userName}" />
+					<h:inputSecret id="password" label="password" required="true"
+						styleClass="form-control" value="#{loginContoller.password}" />
+
+					<h:commandButton type="submit" id="login" value="Login"
+						styleClass="btn btn-lg btn-primary btn-block"
+						onclick="$('#loginForm').attr('action','#{request.contextPath}/login')" />
+
+				</h:form>
+
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>

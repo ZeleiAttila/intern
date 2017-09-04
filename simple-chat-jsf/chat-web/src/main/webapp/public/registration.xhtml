@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/masterLayout.xhtml">
+	<ui:define name="pageTitle">Registration</ui:define>
+	<ui:define name="content">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading top-bar">
+						<div class="col-md-8 col-xs-8">
+							<h3 class="panel-title">
+								<span class="glyphicon glyphicon-plus-sign"></span> Registration
+							</h3>
+						</div>
+
+					</div>
+					<div class="panel-body ">
+						<h:form id="registratonForm" styleClass="form-horizontal">
+							<div class="form-group">
+								<h:outputLabel value="Username:" for="username"
+									styleClass="control-label col-sm-2" />
+								<div class="col-sm-10">
+									<p:inputText id="username"
+										value="#{registrationView.userVo.username}" required="true" />
+								</div>
+								<div class="col-sm-12">
+									<p:message for="username" />
+								</div>
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="Password" for="password"
+									styleClass="control-label col-sm-2" />
+								<div class="col-sm-10">
+									<p:password id="password"
+										value="#{registrationView.userVo.password}" required="true">
+										<f:validateLength minimum="6"></f:validateLength>
+									</p:password>
+								</div>
+								<div class="col-sm-12">
+									<p:message for="password" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<p:commandButton value="Registration"
+										styleClass="btn btn-default"
+										actionListener="#{registrationView.registration()}"></p:commandButton>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

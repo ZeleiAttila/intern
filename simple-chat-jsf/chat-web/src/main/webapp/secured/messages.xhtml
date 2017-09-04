@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/masterLayout.xhtml">
+	<ui:define name="pageTitle">Messages</ui:define>
+	<ui:define name="head-extra" >
+	<h:outputScript library="js" name="messages.js">
+		</h:outputScript>
+	</ui:define>
+	<ui:define name="content">
+		<div class="row">
+			<div class="col-sm-7">
+				<h:form id="messageForm">
+					<p:poll async="true" delay="1000" update="messagesList"
+						oncomplete="scroll();"></p:poll>
+					<div class="row chat-window " id="chat_window_1">
+						<div class="col-xs-12 col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading top-bar">
+									<div class="col-md-8 col-xs-8">
+										<h3 class="panel-title">
+											<span class="glyphicon glyphicon-comment"></span> Chat -
+											#{messagesView.toUser.username}
+										</h3>
+									</div>
+
+								</div>
+								<div id="msg_container" class="panel-body msg_container_base">
+
+									<p:dataList id="messagesList" value="#{messagesView.messages}"
+										type="definition" styleClass="messages-cont" var="message">
+										<f:facet name="description">
+											<div
+												class="row msg_container #{message.fromUser.username == messagesView.fromUser.username ? 'base_sent' : 'base_receive' }  ">
+
+												<div class="col-md-10 col-xs-10">
+													<div
+														class="messages #{message.fromUser.username == messagesView.fromUser.username ? 'msg_sent' : 'msg_receive' }">
+														<p>#{message.content}</p>
+														<time>
+															#{message.fromUser.username}
+															<h:outputText value="#{message.recDate}">
+																<f:convertDateTime pattern="dd-MM-yyyy" />
+															</h:outputText>
+														</time>
+													</div>
+												</div>
+											</div>
+										</f:facet>
+									</p:dataList>
+								</div>
+								<div class="panel-footer">
+									<div class="input-group">
+										<p:inputText value="#{messagesView.content}"
+											styleClass="form-control input-sm chat_input"></p:inputText>
+										<span class="input-group-btn"> <p:commandButton
+												styleClass="btn btn-primary btn-sm chat-button" value="Send"
+												actionListener="#{messagesView.send}" update="messagesList"
+												onsuccess="scrollWhenWrite();"
+												disabled="#{messagesView.toUser == null}"></p:commandButton>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</h:form>
+			</div>
+			<div class="col-sm-5">
+				<h:form id="userForm">
+					<div class="panel panel-default">
+						<div class="panel-heading top-bar">
+							<div class="col-md-8 col-xs-8">
+								<h3 class="panel-title">
+									<span class="glyphicon glyphicon-user"></span> Users
+								</h3>
+							</div>
+
+						</div>
+						<div id="user-list" class="panel-body ">
+							<ul class="list-group">
+								<p:dataList value="#{messagesView.users}" var="user"
+									type="definition">
+
+
+									<p:column>
+										<p:commandLink value="#{user.username}" update="messageForm"
+											styleClass="list-group-item ">
+											<f:setPropertyActionListener value="#{user}"
+												target="#{messagesView.toUser}" />
+										</p:commandLink>
+									</p:column>
+
+								</p:dataList>
+							</ul>
+						</div>
+					</div>
+
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

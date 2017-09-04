@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+	<Call name="addBean">
+		<Arg>
+			<New id="myds" class="org.eclipse.jetty.plus.jndi.Resource">
+				<Arg>
+					<Ref refid="wac" />
+				</Arg>
+				<Arg>jdbc/myds</Arg>
+				<Arg>
+					<New class="org.apache.commons.dbcp2.BasicDataSource">
+						<Set name="driverClassName">org.hsqldb.jdbcDriver</Set>
+						<Set name="url">jdbc:hsqldb:file:target/db/db;hsqldb.lock_file=false;shutdown=true</Set>
+						<Set name="username">SA</Set>
+						<Set name="password"></Set>
+						
+					</New>
+				</Arg>
+			</New>
+		</Arg>
+	</Call>
+</Configure>

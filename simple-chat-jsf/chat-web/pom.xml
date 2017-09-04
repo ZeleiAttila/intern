@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>hu.neuron.junior</groupId>
+		<artifactId>chat</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>hu.neuron.junior.web</groupId>
+	<artifactId>chat-web</artifactId>
+	<packaging>war</packaging>
+	<name>chat-web</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>hu.neuron.junior.service</groupId>
+			<artifactId>chat-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-binding</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-webflow</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-faces</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>4.1.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<finalName>chat-web</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.4.2.v20170220</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/WebApp</contextPath>
+						<extraClasspath>target/classes;../chat-service/target/classes;../chat-core/target/classes;../chat-client-api/target/classes</extraClasspath>
+					</webApp>
+					<jettyXml>src/main/resources/jetty/jetty.xml</jettyXml>
+					<contextXml>src/main/resources/jetty/jetty-config.xml</contextXml>
+					<scanTargets>
+						<scanTarget>target/classes</scanTarget>
+						<scanTarget>../chat-core/target/classes</scanTarget>
+						<scanTarget>../chat-service/target/classes</scanTarget>
+						<scanTarget>../chat-client-api/target/classes</scanTarget>
+					</scanTargets>
+					<httpConnector>
+						<port>9090</port>
+					</httpConnector>
+					<stopPort>9966</stopPort>
+					<stopKey>foo</stopKey>
+					<stopWait>10</stopWait>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.commons</groupId>
+						<artifactId>commons-dbcp2</artifactId>
+						<version>2.1.1</version>
+					</dependency>
+
+
+					<dependency>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+						<version>1.2.17</version>
+					</dependency>
+
+					<dependency>
+						<groupId>org.hsqldb</groupId>
+						<artifactId>hsqldb</artifactId>
+						<version>2.3.2</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
