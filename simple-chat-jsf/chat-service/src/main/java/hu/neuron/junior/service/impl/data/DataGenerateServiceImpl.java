@@ -46,6 +46,10 @@ public class DataGenerateServiceImpl implements DataGenerateService {
 
 				User user = new User();
 				user.setUsername(randomUser.getUsername());
+				user.setFirstName(randomUser.getPersonFirstName());
+				user.setLastName(randomUser.getPersonLastName());
+				user.setEmail(randomUser.getEmail());
+				user.setImageUrl(randomUser.getPictureThumbnail());
 				BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 				String encPassword = bCryptPasswordEncoder.encode("password");
 

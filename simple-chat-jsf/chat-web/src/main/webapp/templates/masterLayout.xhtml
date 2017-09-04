@@ -8,8 +8,8 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<f:view>
-
+<f:view locale="#{pageView.getLocalVar()}">
+	
 	<h:head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -28,6 +28,8 @@
 	</h:head>
 
 	<h:body>
+	<p:outputPanel id = "bodyPanel">
+	
 		<p:growl id="growl" showDetail="true" autoUpdate="true" sticky="true" />
 		<h:form id="loginPopup" styleClass="navbar-form navbar-right">
 			<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -42,28 +44,39 @@
 					</button>
 					<p:link styleClass="navbar-brand" href="/index.xhtml">
 					Simple Chat</p:link>
+					<p:outputLabel styleClass="navbar-brand" value="welcome #{request.userPrincipal.name} !" />
+					<p:graphicImage styleClass="navbar-brand" value="#{usersView.currentUser.imageUrl}"/>
+
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li><c:choose>
 								<c:when test="#{ request.userPrincipal.name == null }">
-									<p:link href="/public/login.xhtml">Login</p:link>
+									<p:link href="/public/login.xhtml">#{out.signin}</p:link>
 								</c:when>
 								<c:otherwise>
-									<p:link href="/logout" value="Logout" icon="ui-icon-extlink" />
+									<p:link href="/logout" value="#{out.logout}" icon="ui-icon-extlink" />
 								</c:otherwise>
 							</c:choose></li>
+							<li>
+								 <h:form>
+                        			<h:selectOneMenu value="#{pageView.locale}" styleClass="btn btn-default">
+                            		<f:selectItems value="#{pageView.countriesList}" />
+                            		<p:ajax  event="change"   listener="#{pageView.setLocale()}" update="bodyPanel"/>
+                        </h:selectOneMenu>
+                    </h:form>
+							</li>
 						<li
 							class="visible-xs-block  #{request.requestURI.toString().contains('/public/registration.xhtml') ? 'active ' : ''}">
-							<p:link href="/public/registration.xhtml">Registration </p:link>
+							<p:link href="/public/registration.xhtml">#{out.signup}</p:link>
 						</li>
 						<li
 							class="visible-xs-block  #{request.requestURI.toString().contains('/secured/messages.xhtml') ? 'active ' : ''}">
-							<p:link href="/secured/messages.xhtml">Messages </p:link>
+							<p:link href="/secured/messages.xhtml">#{out.msg} </p:link>
 						</li>
 						<li
 							class=" visible-xs-block #{request.requestURI.toString().contains('/public/users.xhtml') ? 'active ' : ''}">
-							<p:link href="/public/users.xhtml">Users </p:link>
+							<p:link href="/public/users.xhtml">#{out.users} </p:link>
 						</li>
 
 
@@ -79,15 +92,15 @@
 					<ul class="nav nav-sidebar">
 						<li
 							class="#{request.requestURI.toString().contains('/public/registration.xhtml') ? 'active ' : ''}">
-							<p:link href="/public/registration.xhtml">Registration </p:link>
+							<p:link href="/public/registration.xhtml">#{out.signup} </p:link>
 						</li>
 						<li
 							class="#{request.requestURI.toString().contains('/secured/messages.xhtml') ? 'active ' : ''}">
-							<p:link href="/secured/messages.xhtml">Messages </p:link>
+							<p:link href="/secured/messages.xhtml">#{out.msg} </p:link>
 						</li>
 						<li
 							class="#{request.requestURI.toString().contains('/public/users.xhtml') ? 'active ' : ''}">
-							<p:link href="/public/users.xhtml">Users </p:link>
+							<p:link href="/public/users.xhtml">#{out.users} </p:link>
 						</li>
 					</ul>
 
@@ -103,7 +116,8 @@
 				</div>
 			</div>
 		</div>
-
+		
+		</p:outputPanel>
 	</h:body>
 
 </f:view>

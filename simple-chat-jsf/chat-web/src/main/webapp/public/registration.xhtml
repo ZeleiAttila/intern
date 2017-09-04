@@ -18,7 +18,7 @@
 
 					</div>
 					<div class="panel-body ">
-						<h:form id="registratonForm" styleClass="form-horizontal">
+						<h:form id="registratonForm" styleClass="form-horizontal" enctype="multipart/form-data">
 							<div class="form-group">
 								<h:outputLabel value="Username:" for="username"
 									styleClass="control-label col-sm-2" />
@@ -28,6 +28,39 @@
 								</div>
 								<div class="col-sm-12">
 									<p:message for="username" />
+								</div>
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="Email" for="email"
+									styleClass="control-label col-sm-2" />
+								<div class="col-sm-10">
+									<p:inputText id="email"
+										value="#{registrationView.userVo.email}" required="true" />
+								</div>
+								<div class="col-sm-12">
+									<p:message for="email" />
+								</div>
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="Fisrt Name" for="firstname"
+									styleClass="control-label col-sm-2" />
+								<div class="col-sm-10">
+									<p:inputText id="firstname"
+										value="#{registrationView.userVo.firstName}" required="true" />
+								</div>
+								<div class="col-sm-12">
+									<p:message for="firstname" />
+								</div>
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="Last name" for="lastname"
+									styleClass="control-label col-sm-2" />
+								<div class="col-sm-10">
+									<p:inputText id="lastname"
+										value="#{registrationView.userVo.lastName}" required="true" />
+								</div>
+								<div class="col-sm-12">
+									<p:message for="lastname" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -41,6 +74,16 @@
 								</div>
 								<div class="col-sm-12">
 									<p:message for="password" />
+								</div>
+							</div>
+								<div class="form-group">
+								<h:outputLabel value="Upload a photo" for="image"
+									styleClass="control-label col-sm-2" />
+								<div class="col-sm-10" id="image">
+    								<p:fileUpload allowTypes="*.jpg;*.png" id="image" mode="simple" skinSimple="true" value="#{registrationView.userVo.image}"/>
+								</div>
+								<div class="col-sm-12">
+									  <p:growl id="messages" showDetail="true" />
 								</div>
 							</div>
 							<div class="form-group">

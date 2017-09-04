@@ -13,6 +13,12 @@
 	<packaging>war</packaging>
 	<name>chat-web</name>
 	<url>http://maven.apache.org</url>
+	
+	<properties>
+		 <maven.compiler.source>1.8</maven.compiler.source>
+    	 <maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>hu.neuron.junior.service</groupId>
@@ -165,7 +171,11 @@
 						<artifactId>commons-dbcp2</artifactId>
 						<version>2.1.1</version>
 					</dependency>
-
+					<dependency>
+						<groupId>javax.servlet</groupId>
+						<artifactId>jstl</artifactId>
+						<version>1.2</version>
+					</dependency>
 
 					<dependency>
 						<groupId>log4j</groupId>

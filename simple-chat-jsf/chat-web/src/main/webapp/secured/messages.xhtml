@@ -3,6 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/templates/masterLayout.xhtml">
 	<ui:define name="pageTitle">Messages</ui:define>
 	<ui:define name="head-extra" >
@@ -22,7 +23,8 @@
 									<div class="col-md-8 col-xs-8">
 										<h3 class="panel-title">
 											<span class="glyphicon glyphicon-comment"></span> Chat -
-											#{messagesView.toUser.username}
+											#{messagesView.toUser.lastName} #{messagesView.toUser.firstName}
+											<p:graphicImage value="#{messagesView.toUser.imageUrl}" style="width:25px;"/>
 										</h3>
 									</div>
 
@@ -42,7 +44,9 @@
 														<time>
 															#{message.fromUser.username}
 															<h:outputText value="#{message.recDate}">
-																<f:convertDateTime pattern="dd-MM-yyyy" />
+	
+																	<f:convertDateTime pattern="mm:ss" />
+
 															</h:outputText>
 														</time>
 													</div>
@@ -55,7 +59,8 @@
 									<div class="input-group">
 										<p:inputText value="#{messagesView.content}"
 											styleClass="form-control input-sm chat_input"></p:inputText>
-										<span class="input-group-btn"> <p:commandButton
+										<span class="input-group-btn"> 
+										<p:commandButton
 												styleClass="btn btn-primary btn-sm chat-button" value="Send"
 												actionListener="#{messagesView.send}" update="messagesList"
 												onsuccess="scrollWhenWrite();"
@@ -76,6 +81,12 @@
 							<div class="col-md-8 col-xs-8">
 								<h3 class="panel-title">
 									<span class="glyphicon glyphicon-user"></span> Users
+									
+									 <p:selectOneMenu id="console" value="#{messagesView.displayName}" style="width:125px">
+           	 							<f:selectItem itemLabel="By user name" itemValue="username" />
+            							<f:selectItem itemLabel="By full name" itemValue="fullname" />
+            							<p:ajax event="change" update="@form" />
+        							</p:selectOneMenu>
 								</h3>
 							</div>
 
@@ -84,16 +95,30 @@
 							<ul class="list-group">
 								<p:dataList value="#{messagesView.users}" var="user"
 									type="definition">
-
-
-									<p:column>
-										<p:commandLink value="#{user.username}" update="messageForm"
-											styleClass="list-group-item ">
-											<f:setPropertyActionListener value="#{user}"
-												target="#{messagesView.toUser}" />
-										</p:commandLink>
-									</p:column>
-
+									
+									<c:choose>
+									<c:when test="#{messagesView.displayName == 'username'}">
+										<p:column>
+											<p:commandLink value="#{user.username}" update="messageForm"
+												styleClass="list-group-item ">
+												
+												<f:setPropertyActionListener value="#{user}"
+													target="#{messagesView.toUser}" />
+											</p:commandLink>
+											<p:graphicImage value="#{user.imageUrl}" style="width:25px;"/>
+										</p:column>
+									</c:when>
+									<c:otherwise>
+										<p:column>
+											<p:commandLink value="#{user.lastName} #{user.firstName}" update="messageForm"
+												styleClass="list-group-item ">
+												<f:setPropertyActionListener value="#{user}"
+													target="#{messagesView.toUser}" />
+											</p:commandLink>
+											<p:graphicImage value="#{user.imageUrl}" style="width:25px;"/>
+										</p:column>
+									</c:otherwise>
+									</c:choose>
 								</p:dataList>
 							</ul>
 						</div>

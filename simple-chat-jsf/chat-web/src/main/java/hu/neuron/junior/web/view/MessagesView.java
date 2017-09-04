@@ -28,6 +28,8 @@ public class MessagesView {
 	private UserVo fromUser;
 	private UserVo toUser;
 	private String content;
+	private String displayName = "username";
+	private Date
 
 	private List<UserVo> users;
 
@@ -51,7 +53,15 @@ public class MessagesView {
 		messageService.saveMessage(message);
 	}
 	
-	
+
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
 
 	public List<MessageVo> getMessages() {
 		if (toUser != null) {

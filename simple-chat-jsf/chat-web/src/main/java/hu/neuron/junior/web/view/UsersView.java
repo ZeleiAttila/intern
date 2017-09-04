@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import hu.neuron.junior.client.api.service.user.UserService;
 import hu.neuron.junior.client.api.vo.UserVo;
@@ -26,6 +27,17 @@ public class UsersView {
 
 	} 
 
+	public UserVo getCurrentUser(){
+		UserVo uservo = new UserVo();
+		if( FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal() != null){
+			String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+			uservo = userService.findByUsername(username);
+			
+		}
+		
+		return uservo;
+	}
+	
 	public List<UserVo> getUsers() {
 		return users;
 	}

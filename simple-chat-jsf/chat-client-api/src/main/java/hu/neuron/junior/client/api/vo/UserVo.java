@@ -7,16 +7,58 @@ public class UserVo extends BaseVo implements Serializable {
 
 	private static final long serialVersionUID = -5395968745834185014L;
 
+	private String firstName;
+
+	private String lastName;
+
+	private String email;
+
 	private String username;
 
 	private String password;
 
 	private byte[] image;
+	
+	private String imageUrl;
 
 	private List<RoleVo> roles;
 
+	
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	public String getUsername() {
 		return username;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setUsername(String username) {
